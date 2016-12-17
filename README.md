@@ -1,2 +1,2 @@
 # rb-interval-tree
-Balanced interval tree for javascript
+Balanced interval tree for Javascript
