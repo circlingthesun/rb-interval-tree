@@ -2,9 +2,10 @@
   "name": "rb-interval-tree",
   "version": "1.0.3",
   "description": "Balanced interval tree",
-  "main": "interval-tree.js",
+  "main": "dist/interval-tree.js",
   "scripts": {
-    "test": "node node_modules/istanbul/lib/cli.js cover node_modules/jasmine-node/bin/jasmine-node *.spec.js"
+    "build": "node_modules/.bin/babel interval-tree.js -d dist",
+    "test": "node_modules/.bin/istanbul cover node_modules/.bin/jasmine-node *.spec.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
   },
   "homepage": "https://github.com/circlingthesun/rb-interval-tree#readme",
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-env": "^1.1.4",
     "istanbul": "^0.4.5",
     "jasmine-node": "^1.14.5"
   }
