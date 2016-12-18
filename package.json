@@ -1,6 +1,6 @@
 {
   "name": "rb-interval-tree",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Balanced interval tree",
   "main": "dist/interval-tree.js",
   "scripts": {
