@@ -1,4 +1,43 @@
 # rb-interval-tree
-Balanced interval tree for Javascript
+Balanced red-black interval tree for Javascript
 
 [![Build Status](https://travis-ci.org/circlingthesun/rb-interval-tree.svg)](https://travis-ci.org/circlingthesun/rb-interval-tree)
+
+## Usage
+
+```
+const IntervalTree = require('rb-interval-tree');
+const tree = new IntervalTree();
+```
+
+### Insertion
+
+```javascript
+tree.add(4, 7, 'foo');
+```
+
+### Query
+
+```javascript
+const results = tree.overlaps(0, 10);
+```
+
+### Removal
+
+```javascript
+tree.remove('foo');
+```
+
+### Copy
+
+```javascript
+const dup = tree.copy();
+```
+
+### Traversal (in order)
+
+```javascript
+tree.visit((value, start, end) => {
+    console.log(value, start, end);
+});
+```
