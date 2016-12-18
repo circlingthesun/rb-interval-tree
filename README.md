@@ -16,10 +16,10 @@ const tree = new IntervalTree();
 tree.insert(4, 7, 'foo');
 ```
 
-### Query
+### Search
 
 ```javascript
-const results = tree.overlaps(0, 10);
+const results = tree.search(0, 10);
 ```
 
 ### Removal
