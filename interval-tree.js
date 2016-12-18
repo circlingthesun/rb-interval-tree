@@ -288,7 +288,7 @@ class IntervalTree {
     }
 
     // TODO: Deal with open and closed intervals
-    overlaps(start, end) {
+    search(start, end) {
         const results = [];
         function searchRecursive(node) {
             if (!node || start > node.max){

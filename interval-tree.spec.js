@@ -4,40 +4,40 @@ describe("Interval tree", function() {
     let tree = new IntervalTree();
     it("should insert", function() {
         tree.insert(4, 7, 'foo');
-        const results = tree.overlaps(0, 10);
+        const results = tree.search(0, 10);
         expect(results[0]).toEqual([ 4, 7, 'foo' ]);
     });
 
     it("should find left overlap", function() {
-        expect(tree.overlaps(3, 5).length).toEqual(1);
+        expect(tree.search(3, 5).length).toEqual(1);
     });
 
     it("should find center overlap", function() {
-        expect(tree.overlaps(5, 6).length).toEqual(1);
+        expect(tree.search(5, 6).length).toEqual(1);
     });
 
     it("should find right overlap", function() {
-        expect(tree.overlaps(6, 10).length).toEqual(1);
+        expect(tree.search(6, 10).length).toEqual(1);
     });
 
     it("should find complete overlap", function() {
-        expect(tree.overlaps(0, 10).length).toEqual(1);
+        expect(tree.search(0, 10).length).toEqual(1);
     });
 
     it("should not remove non existing node", function() {
         tree.remove('bar');
-        expect(tree.overlaps(0, 10).length).toEqual(1);
+        expect(tree.search(0, 10).length).toEqual(1);
     });
 
     it("should remove", function() {
         tree.remove('foo');
-        const results = tree.overlaps(0, 10);
+        const results = tree.search(0, 10);
         expect(results.length).toEqual(0);
     });
 
     it("should not remove from empty tree", function() {
         tree.remove('bar');
-        expect(tree.overlaps(0, 10).length).toEqual(0);
+        expect(tree.search(0, 10).length).toEqual(0);
     });
 
     it("should handle many insertions and deletions", function() {
@@ -48,8 +48,8 @@ describe("Interval tree", function() {
         tree.insert(5696, 5912, '5');
         tree.insert(2252, 2270, '6');
 
-        expect(tree.overlaps(0, 6000).length).toEqual(6);
-        expect(tree.overlaps(5000, 6000).length).toEqual(2);
+        expect(tree.search(0, 6000).length).toEqual(6);
+        expect(tree.search(5000, 6000).length).toEqual(2);
 
         tree.remove('1');
         tree.remove('2');
@@ -58,7 +58,7 @@ describe("Interval tree", function() {
         tree.remove('5');
         tree.remove('6');
 
-        expect(tree.overlaps(0, 6000).length).toEqual(0);
+        expect(tree.search(0, 6000).length).toEqual(0);
     });
 
     it("should copy tree", function() {
@@ -71,7 +71,7 @@ describe("Interval tree", function() {
         tree.insert(5840, 5852, '7');
 
         const cpy = tree.copy();
-        expect(tree.overlaps(0, 6000).length).toEqual(7);
+        expect(tree.search(0, 6000).length).toEqual(7);
     });
 
     it("should visit tree", function() {
