@@ -5,7 +5,7 @@ Balanced red-black interval tree for Javascript
 
 ## Usage
 
-```
+```javascript
 const IntervalTree = require('rb-interval-tree');
 const tree = new IntervalTree();
 ```
