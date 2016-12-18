@@ -131,7 +131,7 @@ class IntervalTree {
         node.updateMax();
     }
 
-    add(start, end, value){
+    insert(start, end, value){
         if (this.valueMap.has(value)) {
             console.warn('Duplicate insert', value);
         }
@@ -266,9 +266,9 @@ class IntervalTree {
             node.parent.setChild(node.parent.right === node, child);
         } else {
             this.root = child;
-            if (this.size > 1) {
-                this.root.parent = null;
-            }
+            // if (this.size > 1) {
+            //     this.root.parent = null;
+            // }
         }
 
         if (color(node) === BLACK) {

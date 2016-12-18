@@ -13,7 +13,7 @@ const tree = new IntervalTree();
 ### Insertion
 
 ```javascript
-tree.add(4, 7, 'foo');
+tree.insert(4, 7, 'foo');
 ```
 
 ### Query

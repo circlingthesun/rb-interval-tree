@@ -4,7 +4,7 @@
   "description": "Balanced interval tree",
   "main": "interval-tree.js",
   "scripts": {
-    "test": "node node_modules/jasmine-node/bin/jasmine-node *.spec.js"
+    "test": "node node_modules/istanbul/lib/cli.js cover node_modules/jasmine-node/bin/jasmine-node *.spec.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/circlingthesun/rb-interval-tree#readme",
   "devDependencies": {
+    "istanbul": "^0.4.5",
     "jasmine-node": "^1.14.5"
   }
 }

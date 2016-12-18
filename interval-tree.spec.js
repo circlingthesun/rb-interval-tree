@@ -3,29 +3,30 @@ let IntervalTree = require('./interval-tree');
 describe("Interval tree", function() {
     let tree = new IntervalTree();
     it("should insert", function() {
-        tree.add(4, 7, 'foo');
+        tree.insert(4, 7, 'foo');
         const results = tree.overlaps(0, 10);
         expect(results[0]).toEqual([ 4, 7, 'foo' ]);
     });
 
     it("should find left overlap", function() {
-        const results = tree.overlaps(3, 5);
-        expect(results.length).toEqual(1);
+        expect(tree.overlaps(3, 5).length).toEqual(1);
     });
 
     it("should find center overlap", function() {
-        const results = tree.overlaps(5, 6);
-        expect(results.length).toEqual(1);
+        expect(tree.overlaps(5, 6).length).toEqual(1);
     });
 
     it("should find right overlap", function() {
-        const results = tree.overlaps(6, 10);
-        expect(results.length).toEqual(1);
+        expect(tree.overlaps(6, 10).length).toEqual(1);
     });
 
     it("should find complete overlap", function() {
-        const results = tree.overlaps(0, 10);
-        expect(results.length).toEqual(1);
+        expect(tree.overlaps(0, 10).length).toEqual(1);
+    });
+
+    it("should not remove non existing node", function() {
+        tree.remove('bar');
+        expect(tree.overlaps(0, 10).length).toEqual(1);
     });
 
     it("should remove", function() {
@@ -34,13 +35,18 @@ describe("Interval tree", function() {
         expect(results.length).toEqual(0);
     });
 
+    it("should not remove from empty tree", function() {
+        tree.remove('bar');
+        expect(tree.overlaps(0, 10).length).toEqual(0);
+    });
+
     it("should handle many insertions and deletions", function() {
-        tree.add(2240, 2456, '1');
-        tree.add(3104, 3320, '2');
-        tree.add(3968, 4184, '3');
-        tree.add(4832, 5048, '4');
-        tree.add(5696, 5912, '5');
-        tree.add(2252, 2270, '6');
+        tree.insert(2240, 2456, '1');
+        tree.insert(3104, 3320, '2');
+        tree.insert(3968, 4184, '3');
+        tree.insert(4832, 5048, '4');
+        tree.insert(5696, 5912, '5');
+        tree.insert(2252, 2270, '6');
 
         expect(tree.overlaps(0, 6000).length).toEqual(6);
         expect(tree.overlaps(5000, 6000).length).toEqual(2);
@@ -53,5 +59,77 @@ describe("Interval tree", function() {
         tree.remove('6');
 
         expect(tree.overlaps(0, 6000).length).toEqual(0);
-    })
+    });
+
+    it("should copy tree", function() {
+        tree.insert(3104, 3176, '1');
+        tree.insert(3176, 3194, '2');
+        tree.insert(2420, 2438, '3');
+        tree.insert(5696, 5768, '4');
+        tree.insert(2240, 2249, '5');
+        tree.insert(3212, 3236, '6');
+        tree.insert(5840, 5852, '7');
+
+        const cpy = tree.copy();
+        expect(tree.overlaps(0, 6000).length).toEqual(7);
+    });
+
+    it("should visit tree", function() {
+        let c = 0;
+        tree.visit(() => {
+            c++;
+        });
+        expect(c).toEqual(7);
+    });
+});
+
+
+describe("Interval tree", function() {
+    let tree = new IntervalTree();
+    it("should handle many insertions and deletions 2", function() {
+        for(let i = 0; i < 100; i++){
+            let start = 1;
+            let end = i;
+            tree.insert(start, end, end);
+        }
+
+        tree.remove(tree.root.right.right.value);
+        tree.remove(tree.root.value);
+        tree.remove(tree.root.right.right.value);
+        tree.remove(tree.root.value);
+
+        tree.remove(tree.root.right.left.value);
+        tree.remove(tree.root.left.right.left.value);
+        tree.remove(tree.root.right.left.value);
+        tree.remove(tree.root.value);
+
+
+        tree.remove(tree.root.left.left.left.value);
+        tree.remove(tree.root.left.left.left.value);
+        tree.remove(tree.root.left.left.left.value);
+
+        tree.remove(tree.root.right.right.right.value);
+        tree.remove(tree.root.right.right.right.value);
+        tree.remove(tree.root.right.right.right.value);
+        tree.remove(tree.root.right.right.right.value);
+        tree.remove(tree.root.right.right.right.value);
+
+        tree.remove(tree.root.right.left.right.value);
+        tree.remove(tree.root.left.right.left.value);
+
+        tree.remove(tree.root.right.left.right.value);
+        tree.remove(tree.root.left.right.left.value);
+
+        tree.remove(tree.root.right.left.right.value);
+        tree.remove(tree.root.left.right.left.value);
+
+        tree.remove(tree.root.right.left.right.value);
+        tree.remove(tree.root.left.right.left.value);
+
+        tree.remove(tree.root.right.left.right.value);
+        tree.remove(tree.root.left.right.left.value);
+
+        tree.remove(tree.root.right.left.right.value);
+        tree.remove(tree.root.left.right.left.value);
+    });
 });
