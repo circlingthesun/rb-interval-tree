@@ -7,6 +7,9 @@
     "build": "node_modules/.bin/babel interval-tree.js -d dist",
     "test": "node_modules/.bin/istanbul cover node_modules/.bin/jasmine-node *.spec.js"
   },
+  "files": [
+    "dist/interval-tree.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/circlingthesun/rb-interval-tree.git"
