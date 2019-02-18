@@ -37,12 +37,17 @@ class ITNode<RangeType, ValueType> {
   right: ITNode<RangeType, ValueType> | null
   left: ITNode<RangeType, ValueType> | null
   color: Color
-  max: any
+  max: RangeType
   start: RangeType
   end: RangeType
   value: ValueType
 
-  constructor(start: any, end: any, value: any, color: Color = Color.RED) {
+  constructor(
+    start: RangeType,
+    end: RangeType,
+    value: ValueType,
+    color: Color = Color.RED
+  ) {
     this.parent = null
     this.right = null
     this.left = null
@@ -57,7 +62,7 @@ class ITNode<RangeType, ValueType> {
     return currentDir ? this.right : this.left
   }
 
-  setChild(currentDir: Direction, val: any) {
+  setChild(currentDir: Direction, val: ITNode<RangeType, ValueType>) {
     this[currentDir ? 'right' : 'left'] = val
     if (val) {
       val.parent = this
@@ -261,7 +266,7 @@ export default class IntervalTree<RangeType, ValueType> {
     }
   }
 
-  remove(value: any) {
+  remove(value: ValueType) {
     if (this.root === null) {
       return
     }
@@ -341,8 +346,8 @@ export default class IntervalTree<RangeType, ValueType> {
   }
 
   // TODO: Deal with open and closed intervals
-  search(start: any, end: any) {
-    const results: any[] = []
+  search(start: RangeType, end: RangeType) {
+    const results: [RangeType, RangeType, ValueType][] = []
     function searchRecursive(node: ITNode<RangeType, ValueType>) {
       if (!node || start > node.max) {
         return
@@ -365,7 +370,7 @@ export default class IntervalTree<RangeType, ValueType> {
     return results
   }
 
-  copy(valueCopier = (v: any) => v) {
+  copy(valueCopier = (v: ValueType) => v) {
     // Build copy with same values
     const newTree = new IntervalTree()
     newTree.size = this.size
@@ -404,7 +409,7 @@ export default class IntervalTree<RangeType, ValueType> {
     return newTree
   }
 
-  visit(visitor: any) {
+  visit(visitor: (v: ValueType, s: RangeType, end: RangeType) => void) {
     visitRecurse(this.root)
 
     function visitRecurse(node: ITNode<RangeType, ValueType> | null) {
