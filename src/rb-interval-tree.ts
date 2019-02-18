@@ -269,7 +269,7 @@ export default class IntervalTree<RangeType, ValueType> {
     let node = this.valueMap.get(value)
 
     if (!node) {
-      console.log('Cannot find: ', value)
+      console.warn('Cannot find: ', value)
       return
     }
 
