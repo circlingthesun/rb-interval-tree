@@ -1,6 +1,6 @@
 {
   "name": "rb-interval-tree",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Balanced interval tree",
   "keywords": [
     "red",
